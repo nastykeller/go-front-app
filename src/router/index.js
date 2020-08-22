@@ -11,14 +11,12 @@ const routes = [
   {
     path: '/vote',
     name: 'vote',
-    component: () => import('../views/vote/Index.vue'),
-    children: [
-      {
-        path: '/create',
-        name: 'voteCreate'
-        // component:
-      }
-    ]
+    component: () => import('../views/vote/Index.vue')
+  },
+  {
+    path: '/create',
+    name: 'voteCreate',
+    component: () => import('../views/vote/Create.vue')
   },
   {
     path: '/about',

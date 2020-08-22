@@ -4,7 +4,7 @@
       <div
         v-for="(item, index) in list"
         :key="index"
-        class="d-flex"
+        class="d-flex mt-10"
       >
         <v-card
           class="mx-auto mb-5"

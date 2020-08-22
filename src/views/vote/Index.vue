@@ -1,8 +1,5 @@
 <template>
   <div>
-    <p class="text-h5 pl-12 py-5">
-      Список
-    </p>
     <vote-list />
   </div>
 </template>
