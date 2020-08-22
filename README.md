@@ -1,5 +1,13 @@
 # go-front-app
 
+## Описание проекта
+
+Веб-панель администратора для системы голосования GO. Позволяет администраторам просматривать / управлять результатами голосования
+
+## Project description
+
+Web admin panel for GO vote system. Allows admins view / manage vote results
+
 ## Project setup
 ```
 npm install
@@ -20,5 +28,3 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
