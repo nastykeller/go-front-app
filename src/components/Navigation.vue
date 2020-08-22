@@ -29,6 +29,19 @@
       </template>
       <span>Добавить голосование</span>
     </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          icon
+          v-bind="attrs"
+          v-on="on"
+          @click="viewVotesList"
+        >
+          <v-icon>mdi-view-list</v-icon>
+        </v-btn>
+      </template>
+      <span>Посмотреть список</span>
+    </v-tooltip>
   </v-app-bar>
 </template>
 
@@ -38,6 +51,9 @@ export default {
   methods: {
     createVote () {
       this.$router.push('/create')
+    },
+    viewVotesList () {
+      this.$router.push('/vote')
     }
   }
 }
