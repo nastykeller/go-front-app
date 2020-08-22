@@ -5,31 +5,30 @@
       color="primary"
       dark
     >
-      <div class="d-flex align-center">
+      <v-toolbar-title
+        style="width: 100px"
+        class="ml-0 pl-4"
+      >
         <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
           src="@/assets/logo.png"
-          transition="scale-transition"
-          width="40"
+          contain
+          height="30"
+          width="156"
         />
-      </div>
+      </v-toolbar-title>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld />
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
-
 export default {
   name: 'App',
   components: {
-    HelloWorld
+
   },
 
   data: () => ({
