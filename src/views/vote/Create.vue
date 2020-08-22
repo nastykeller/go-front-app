@@ -117,29 +117,44 @@
         icon
         color="primary"
         class="mr-2"
+        @click="addAnswer"
       >
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-card-title>
 
     <v-list>
-      <v-list-item>
+      <v-list-item
+        v-for="(answer, index) in answers"
+        :key="index"
+      >
         <v-list-item-content>
           <v-list-item-title>
             <v-text-field
+              v-model="answer.text"
               placeholder="Вариант ответа"
               outlined
               dense
               hide-details
               class="pl-3 pr-4 mt-1"
               append-outer-icon="mdi-delete"
-              @click="addAnswer"
-              @click:append-outer="deleteAnswer"
+              @click:append-outer="deleteAnswer(index)"
             />
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
+    <v-row>
+      <v-spacer />
+      <v-btn
+        color="primary"
+        class="mr-4 mb-3"
+        text
+        @click="writeAnswer"
+      >
+        Сохранить
+      </v-btn>
+    </v-row>
   </v-card>
 </template>
 
@@ -154,26 +169,53 @@ export default {
       description: null,
       today: moment().format('YYYY-MM-DD'),
       dateClosed: moment().format('YYYY-MM-DD'),
+      voteId: null,
+      answers: [],
       isLoading: false,
       menu: false
     }
   },
   methods: {
     addAnswer () {
-      // TODO: add element to DOM
+      this.answers.push({
+        text: ''
+      })
     },
-    deleteAnswer () {
-      // TODO: delete element from DOM
+    deleteAnswer (index) {
+      this.answers.splice(index, 1)
     },
     createVote () {
+      this.isLoading = true
       this.$http.post('/votes', {
         name: this.name,
         description: this.description,
         date_closed: moment.utc(this.dateClosed)
       }).then((result) => {
         console.log(result)
+        const data = result.data
+        this.voteId = data.id
       }).catch((err) => {
         console.log(err)
+      }).finally(() => {
+        this.isLoading = false
+      })
+    },
+    sendAnswer (answer) {
+      this.isLoading = true
+      this.$http.post('/votes/answers', {
+        text: answer,
+        question: this.voteId
+      }).then((result) => {
+        console.log(result)
+      }).catch((err) => {
+        console.log(err)
+      }).finally(() => {
+        this.isLoading = false
+      })
+    },
+    writeAnswer () {
+      this.answers.forEach(answer => {
+        this.sendAnswer(answer.text)
       })
     }
   }
